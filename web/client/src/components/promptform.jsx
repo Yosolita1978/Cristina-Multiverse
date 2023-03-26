@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Form } from "react-bootstrap";
+import React, { useState } from 'react';
+
 
 
 const MyForm = (props) => {
@@ -18,9 +18,8 @@ const MyForm = (props) => {
     }
 
     return (
-        <Form className='form-prompt' onSubmit={handleSubmit}>
-            <Form.Group>
-                <Form.Label>Prompt for the Multiverse</Form.Label>
+        <form className="form" onSubmit={handleSubmit}>
+                <label>Prompt for the Multiverse</label>
                 <input
                     type="text"
                     id="add-prompt"
@@ -29,9 +28,8 @@ const MyForm = (props) => {
                     value={prompt}
                     onChange={handlePromptChange}
                 />
-            </Form.Group>
-            <Button type="submit" variant="outline-success">Create</Button>
-        </Form>
+            <button  variant="outline-success">Create</button>
+        </form>
     )
 
 }

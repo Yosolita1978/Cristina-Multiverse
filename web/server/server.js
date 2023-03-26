@@ -30,11 +30,10 @@ app.post('/api/multiverse', async (req, res) => {
 
     const modelParameters = req.body.prompt;
     try{
-    const modelParameters = req.body;
-    //const out = await banana.run(apiKey, modelKey, modelParameters)
+    const out = await banana.run(apiKey, modelKey, modelParameters)
     //out.modelOutputs[0].image_base64
     console.log(modelParameters);
-    res.json(modelParameters);
+    res.json({photo: out.modelOutputs[0].image_base64, prompt: modelParameters});
 
     } catch (e){
         console.log(e);
