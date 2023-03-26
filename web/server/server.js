@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const path = require('path');
 const banana = require('@banana-dev/banana-dev');
+const db = require('./db/db-connection.js');
 
 
 const app = express();
@@ -25,18 +26,30 @@ app.get('/api/model', (req, res) => {
 
 });
 
-// create the post request for students in the endpoint '/api/students'
+// create the get request for the photos in the db in the endpoint '/api/photos'
+app.get('/api/photos', async (req, res) => {
+    try {
+        const { rows: photos } = await db.query('SELECT * FROM photos');
+        res.send(photos[0]);
+    } catch (e) {
+        return res.status(400).json({ e });
+    }
+});
+
+// create the post request for the images in the endpoint miltiverse'
 app.post('/api/multiverse', async (req, res) => {
 
-    const modelParameters = req.body.prompt;
+    //req.body.prompt
+    const modelParameters = {prompt: req.body.prompt}
     try{
     const out = await banana.run(apiKey, modelKey, modelParameters)
     //out.modelOutputs[0].image_base64
-    console.log(modelParameters);
+    console.log(out.modelOutputs[0].image_base64);
     res.json({photo: out.modelOutputs[0].image_base64, prompt: modelParameters});
 
-    } catch (e){
+    } catch (e){ 
         console.log(e);
+        return res.status(400).json({ e });
     }
     
 });

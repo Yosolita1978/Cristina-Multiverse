@@ -82,14 +82,16 @@ main{
   font-family: 'Inconsolata';font-size: 22px;
 }
 
+.date{
+    color: #ffffff;
+    text-align: center;
+    font-family: 'Inconsolata';font-size: 22px;
+}
+
 .container {
   max-width: 300px;
-
   /* Center the container in middle on horizontal axis */
   margin: 0 auto;
-
-  /* Add empty space above the container (20% of the view height) */
-  margin-top: 20vh;
 }
 
 img{

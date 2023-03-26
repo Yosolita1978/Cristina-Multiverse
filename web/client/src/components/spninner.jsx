@@ -1,4 +1,4 @@
-import spinner from '../assets/spinnericon.jpg';
+import spinner from '../assets/spinnericon.jpeg';
 
 function Spinner() {
   return (
