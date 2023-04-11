@@ -3,7 +3,7 @@ import React from 'react';
 
 const MyCard = (props) => {
 
-    //console.log(props);
+    console.log(props);
 
     let url;
     if(props.is64){

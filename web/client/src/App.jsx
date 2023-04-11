@@ -3,40 +3,16 @@ import React, { useState, useEffect } from 'react'
 import MyForm from './components/promptform';
 import MyCard from './components/cards';
 import Header from './components/header';
-import Eduard from "../src/assets/Eduard.jpg";
-import StartTrek from "../src/assets/starttrek.jpg";
-import Space from "./assets/austronauta.jpg";
 import Spinner from "./components/spninner"
 
 
 
 function App() {
-
-  //{photo: out.modelOutputs[0].image_base64, prompt: modelParameters}
-    //Initial Data to see photos
-    const initialData = [{
-      id: 1,
-      photo: Eduard,
-      prompt: "A oil paint of ecrodriguez as character from Eduard Moore painting"
-    }, {
-      id: 2, 
-      photo: StartTrek,
-      prompt: "A photo of ecrodriguez in the red uniform as capitan of the enterprise in the New Star Trek movie"
-    }, {
-      id: 3, 
-      photo: Space,
-      prompt: "A photo of ecrodriguez  with astronaut helmets by ilya kuvshinov"
-    }]
-
-    
+   
   const [message, setMessage] = useState(null);
   const [prompts, setPrompts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [myDefault, setMyDefault] = useState([]);
 
-  const loadInitialData = () =>{
-      setMyDefault(initialData);
-    }
 
   const callBackend = () => {
     // A function to show that the backend is working
@@ -55,14 +31,14 @@ function App() {
     fetch("http://localhost:8080/api/photos")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setPrompts((prompts) => [...prompts, data]);
+        //console.log(data);
+        setPrompts(data);
+        console.log(prompts);
       });
   }
   
   useEffect(() => {
     callBackend();
-    loadInitialData();
   }, []);
 
   useEffect(() =>{
@@ -105,18 +81,9 @@ function App() {
       <p className='date'>Current multiverse at {date.toLocaleString()}</p>
       <section className="gallery">
       <ul>
-            {myDefault.map((element, index) => (
+            {prompts.map((object, index) => (
             <li key={index}>
-            <MyCard key={element.id} prompt={element.prompt} photo={element.photo} is64={false} />
-            </li>
-        ) )}
-      </ul>
-      </section>
-      <section className="gallery">
-      <ul>
-            {prompts.map((prompt, index) => (
-            <li key={index}>
-            <MyCard key={prompt.id} prompt={prompt.prompt} photo={prompt.photo} is64={true} />
+            <MyCard key={object.id} prompt={object.prompt} photo={object.photo} is64={true} />
             </li>
         ) )}
       </ul>

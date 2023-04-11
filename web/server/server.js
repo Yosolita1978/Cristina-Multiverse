@@ -30,7 +30,8 @@ app.get('/api/model', (req, res) => {
 app.get('/api/photos', async (req, res) => {
     try {
         const { rows: photos } = await db.query('SELECT * FROM photos');
-        res.send(photos[0]);
+        console.log(photos);
+        res.send(photos);
     } catch (e) {
         return res.status(400).json({ e });
     }
@@ -40,18 +41,23 @@ app.get('/api/photos', async (req, res) => {
 app.post('/api/multiverse', async (req, res) => {
 
     //req.body.prompt
-    const modelParameters = {prompt: req.body.prompt}
-    try{
-    const out = await banana.run(apiKey, modelKey, modelParameters)
-    //out.modelOutputs[0].image_base64
-    console.log(out.modelOutputs[0].image_base64);
-    res.json({photo: out.modelOutputs[0].image_base64, prompt: modelParameters});
+    const modelParameters = { prompt: req.body.prompt }
+    try {
+        const out = await banana.run(apiKey, modelKey, modelParameters)
+        //out.modelOutputs[0].image_base64
+        //console.log(out.modelOutputs[0].image_base64);
+        const result = await db.query(
+            'INSERT INTO photos(photo, prompt) VALUES($1, $2) RETURNING *',
+            [out.modelOutputs[0].image_base64, modelParameters.prompt],
+        );
+        console.log(result.rows[0]);
+        res.json(result.rows[0]);
 
-    } catch (e){ 
+    } catch (e) {
         console.log(e);
         return res.status(400).json({ e });
     }
-    
+
 });
 
 
