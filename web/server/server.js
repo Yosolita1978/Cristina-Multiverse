@@ -8,6 +8,9 @@ const db = require('./db/db-connection.js');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
+//web/client/dist
+const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
+app.use(express.static(REACT_BUILD_DIR));
 app.use(cors());
 app.use(express.json());
 
@@ -17,7 +20,8 @@ const modelKey = process.env.BANANA_MODEL_KEY;
 
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
-    res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
+    //res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
+    res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
 // create the get request for students in the endpoint '/api/students'

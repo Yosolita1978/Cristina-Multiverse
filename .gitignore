@@ -110,6 +110,7 @@ ENV/
 env.bak/
 venv.bak/
 web/.DS_Store
+web/client/dist
 
 # Spyder project settings
 .spyderproject
