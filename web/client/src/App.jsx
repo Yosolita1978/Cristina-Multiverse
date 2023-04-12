@@ -16,7 +16,7 @@ function App() {
 
   const callBackend = () => {
     // A function to show that the backend is working
-    fetch("http://localhost:8080/api/model")
+    fetch("/api/model")
       .then((response) => response.json())
       .then((data) => {
         setMessage(data);
@@ -28,7 +28,7 @@ function App() {
       return
     } 
     // A function to show that the backend is working
-    fetch("http://localhost:8080/api/photos")
+    fetch("/api/photos")
       .then((response) => response.json())
       .then((data) => {
         //console.log(data);
@@ -50,7 +50,7 @@ function App() {
     setLoading(true);
     let response;
     try{
-      response = await fetch("http://localhost:8080/api/multiverse", {
+      response = await fetch("/api/multiverse", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt: newPrompt })})
