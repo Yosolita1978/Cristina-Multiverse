@@ -54,7 +54,7 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt: newPrompt })})
       const data = await response.json();
-      console.log("From the post ", data)
+      //console.log("From the post ", data)
       setPrompts((prompts) => [...prompts, data]);
       callDb();
       setLoading(false);

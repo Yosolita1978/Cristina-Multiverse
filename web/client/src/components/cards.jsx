@@ -3,8 +3,6 @@ import React from 'react';
 
 const MyCard = (props) => {
 
-    console.log(props);
-
     let url;
     if(props.is64){
         url = `data:image/jpeg;base64,${props.photo}`;
