@@ -34,8 +34,11 @@ app.get('/api/model', (req, res) => {
 app.get('/api/photos', async (req, res) => {
     try {
         const { rows: photos } = await db.query('SELECT * FROM photos');
-        console.log(photos);
-        res.send(photos);
+        // console.log(photos);
+        // res.send(photos);
+        let resultDB = photos
+        let reverse = resultDB.reverse();
+        res.send(reverse);
     } catch (e) {
         return res.status(400).json({ e });
     }
@@ -54,6 +57,7 @@ app.post('/api/multiverse', async (req, res) => {
             'INSERT INTO photos(photo, prompt) VALUES($1, $2) RETURNING *',
             [out.modelOutputs[0].image_base64, modelParameters.prompt],
         );
+        
         console.log(result.rows[0]);
         res.json(result.rows[0]);
 

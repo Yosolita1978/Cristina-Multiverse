@@ -33,7 +33,6 @@ function App() {
       .then((data) => {
         //console.log(data);
         setPrompts(data);
-        console.log(prompts);
       });
   }
   
@@ -57,6 +56,7 @@ function App() {
       const data = await response.json();
       console.log("From the post ", data)
       setPrompts((prompts) => [...prompts, data]);
+      callDb();
       setLoading(false);
     } catch(e){
       console.error(e);
