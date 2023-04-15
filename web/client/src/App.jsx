@@ -1,5 +1,6 @@
 import './App.css'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import MyForm from './components/promptform';
 import MyCard from './components/cards';
 import Header from './components/header';
@@ -8,6 +9,8 @@ import Spinner from "./components/spninner"
 
 
 function App() {
+
+  const {loginWithPopup, logout, user, isAuthenticated} = useAuth0(); 
    
   const [message, setMessage] = useState(null);
   const [prompts, setPrompts] = useState([]);
@@ -68,9 +71,10 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header loginWithPopup={loginWithPopup} logout={logout} />
       <main>
         <h1>Let's create Cristina's Multiverse</h1>
+        {isAuthenticated ? <p>{`Welcome ${user.nickname} - Master`}</p> : null}
         <p>
           Suggest a Stable Diffusion prompt to generate me an avatar to add to my multiverse. Refer to
           me as ecrodriguez (one word).

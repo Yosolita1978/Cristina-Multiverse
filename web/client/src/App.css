@@ -160,6 +160,11 @@ img{
   object-fit: cover;
 }
 
+.header a{
+  padding: 2em;
+  cursor: pointer;
+}
+
 
 @media screen and (min-width: 800px) {
   main {
