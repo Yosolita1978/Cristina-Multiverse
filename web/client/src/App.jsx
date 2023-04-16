@@ -70,7 +70,8 @@ function App() {
   }
 
   const handleLogin = () => {
-    loginWithPopup({audience: IDENTIFIER });
+    loginWithPopup();
+    //console.log(IDENTIFIER);
   }
 
   //A function to handle the Delete funtionality
