@@ -104,7 +104,7 @@ function App() {
 
   return (
     <>
-      <Header loginWithPopup={handleLogin} logout={logout} user={user} />
+      <Header loginWithPopup={handleLogin} logout={() => logout({ returnTo: window.location.origin })} user={user} />
       <main>
         <h1>Let's create Cristina's Multiverse</h1>
         {isAuthenticated ? <p>{`Welcome ${user.nickname} - Master User`}</p> : null}

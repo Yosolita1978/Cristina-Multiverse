@@ -15,14 +15,12 @@ app.use(express.static(REACT_BUILD_DIR));
 app.use(cors());
 app.use(express.json());
 
-const jwtCheck = auth({
-    audience: process.env.AUDIENCE,
-    issuerBaseURL: process.env.ISSUER_BASE_URL,
+const validateAccessToken = auth({
+    audience: '6f$UlEREcOal',
+    issuerBaseURL: 'https://multiverse-yosola.us.auth0.com/',
     tokenSigningAlg: 'RS256'
   });
 
-// // enforce on all endpoints
-// app.use('/api/multiverse/:id', jwtCheck);
 
 const apiKey = process.env.BANANA_API_KEY;
 const modelKey = process.env.BANANA_MODEL_KEY;
@@ -78,7 +76,7 @@ app.post('/api/multiverse', async (req, res) => {
 });
 
 // delete request - this endpoint is not in the path object so it will be enforced for the Auth0
-app.delete('/api/multiverse/:id',  jwtCheck, async (req, res) =>{
+app.delete('/api/multiverse/:id',  validateAccessToken, async (req, res) =>{
     const promptId = req.params.id;
     //console.log("From the delete request-url", req.params,  promptId);
     await db.query('DELETE FROM photos WHERE id=$1', [promptId]);
