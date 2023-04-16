@@ -101,7 +101,7 @@ function App() {
       <Header loginWithPopup={handleLogin} logout={logout} />
       <main>
         <h1>Let's create Cristina's Multiverse</h1>
-        {isAuthenticated ? <p>{`Welcome ${user.nickname} - Master`}</p> : null}
+        {isAuthenticated ? <p>{`Welcome ${user.nickname} - Master User`}</p> : null}
         <p>
           Suggest a Stable Diffusion prompt to generate me an avatar to add to my multiverse. Refer to
           me as ecrodriguez (one word).
