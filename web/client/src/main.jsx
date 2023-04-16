@@ -6,7 +6,6 @@ import { Auth0Provider } from '@auth0/auth0-react';
 import { ThemeProvider } from "@material-tailwind/react";
 const DOMAIN = import.meta.env.VITE_DOMAIN;
 const CLIENTID = import.meta.env.VITE_CLIENTID;
-const CLIENTSECRET = import.meta.env.VITE_CLIENTSECRET;
 const IDENTIFIER = import.meta.env.VITE_IDENTIFIER;
 
 ReactDOM.createRoot(document.getElementById('root')).render(

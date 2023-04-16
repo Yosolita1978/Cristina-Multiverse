@@ -76,10 +76,10 @@ function App() {
   //A function to handle the Delete funtionality
   const onDelete = async (id) => {
     try {
-      console.log(id);
-      console.log(IDENTIFIER);
+      //console.log(id);
+      //console.log(IDENTIFIER);
       const token = await getAccessTokenSilently();
-      console.log(token);
+      //console.log(token);
       const requestOptions = {
         method: 'DELETE',
         headers: {
