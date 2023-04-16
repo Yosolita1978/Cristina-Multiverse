@@ -16,8 +16,8 @@ app.use(cors());
 app.use(express.json());
 
 const validateAccessToken = auth({
-    audience: '6f$UlEREcOal',
-    issuerBaseURL: 'https://multiverse-yosola.us.auth0.com/',
+    audience: process.env.AUDIENCE,
+    issuerBaseURL: process.env.ISSUER_BASE_URL,
     tokenSigningAlg: 'RS256'
   });
 

@@ -78,7 +78,7 @@ function App() {
   const onDelete = async (id) => {
     try {
       //console.log(id);
-      console.log(IDENTIFIER);
+      //console.log(IDENTIFIER);
       const token = await getAccessTokenSilently();
       //console.log(token);
       const requestOptions = {
