@@ -7,16 +7,18 @@ import { ThemeProvider } from "@material-tailwind/react";
 const DOMAIN = import.meta.env.VITE_DOMAIN;
 const CLIENTID = import.meta.env.VITE_CLIENTID;
 const CLIENTSECRET = import.meta.env.VITE_CLIENTSECRET;
-const IDENTIFIER = import.meta.env.VITE_IDENDTIFIER;
+const IDENTIFIER = import.meta.env.VITE_IDENTIFIER;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Auth0Provider
     domain={DOMAIN}
     clientId={CLIENTID}
-    redirectUri={window.location.origin}
-    audience={IDENTIFIER}
-    scope="openid profile email"
+    authorizationParams={{
+      redirect_uri: window.location.origin,
+      audience: IDENTIFIER,
+      scope: "delete:post"
+    }}
     >
     <ThemeProvider>
       <App />

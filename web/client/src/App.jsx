@@ -4,18 +4,18 @@ import { useAuth0 } from '@auth0/auth0-react';
 import MyForm from './components/promptform';
 import MyCard from './components/cards';
 import Header from './components/header';
-import Spinner from "./components/spninner"
+import Spinner from "./components/spninner";
+const IDENTIFIER = import.meta.env.VITE_IDENTIFIER;
 
 
 
 function App() {
 
-  const { loginWithPopup, logout, user, isAuthenticated } = useAuth0();
+  const { loginWithPopup, logout, user, isAuthenticated, getAccessTokenSilently} = useAuth0();
 
   const [message, setMessage] = useState(null);
   const [prompts, setPrompts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isCristina, setIsCristina] = useState(false);
 
 
   const callBackend = () => {
@@ -70,16 +70,21 @@ function App() {
   }
 
   const handleLogin = () => {
-    loginWithPopup();
-    setIsCristina(true);
+    loginWithPopup({audience: IDENTIFIER });
   }
 
   //A function to handle the Delete funtionality
   const onDelete = async (id) => {
     try {
       console.log(id);
+      console.log(IDENTIFIER);
+      const token = await getAccessTokenSilently();
+      console.log(token);
       const requestOptions = {
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       };
 
       const response = await fetch(`/api/multiverse/${id}`, requestOptions);
@@ -88,7 +93,6 @@ function App() {
       if(data.msg){
         callDb();
       }
-      //callDb();
     } catch (error) {
       console.log(error);
     }
@@ -98,7 +102,7 @@ function App() {
 
   return (
     <>
-      <Header loginWithPopup={handleLogin} logout={logout} />
+      <Header loginWithPopup={handleLogin} logout={logout} user={user} />
       <main>
         <h1>Let's create Cristina's Multiverse</h1>
         {isAuthenticated ? <p>{`Welcome ${user.nickname} - Master User`}</p> : null}
@@ -114,7 +118,7 @@ function App() {
         <ul>
           {prompts.map((object, index) => (
             <li key={index}>
-              <MyCard key={object.id} id={object.id} prompt={object.prompt} photo={object.photo} is64={true} user={isCristina} onDelete={onDelete} />
+              <MyCard key={object.id} id={object.id} prompt={object.prompt} photo={object.photo} is64={true} user={user} onDelete={onDelete} />
             </li>
           ))}
         </ul>

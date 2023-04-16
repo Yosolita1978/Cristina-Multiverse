@@ -4,6 +4,7 @@ require('dotenv').config();
 const path = require('path');
 const banana = require('@banana-dev/banana-dev');
 const db = require('./db/db-connection.js');
+const { auth } = require('express-oauth2-jwt-bearer');
 
 
 const app = express();
@@ -13,6 +14,15 @@ const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(REACT_BUILD_DIR));
 app.use(cors());
 app.use(express.json());
+
+const jwtCheck = auth({
+    audience: process.env.AUDIENCE,
+    issuerBaseURL: process.env.ISSUER_BASE_URL,
+    tokenSigningAlg: 'RS256'
+  });
+
+// // enforce on all endpoints
+// app.use('/api/multiverse/:id', jwtCheck);
 
 const apiKey = process.env.BANANA_API_KEY;
 const modelKey = process.env.BANANA_MODEL_KEY;
@@ -57,7 +67,7 @@ app.post('/api/multiverse', async (req, res) => {
             [out.modelOutputs[0].image_base64, modelParameters.prompt],
         );
         
-        console.log(result.rows[0]);
+        //console.log(result.rows[0]);
         res.json(result.rows[0]);
 
     } catch (e) {
@@ -68,7 +78,7 @@ app.post('/api/multiverse', async (req, res) => {
 });
 
 // delete request - this endpoint is not in the path object so it will be enforced for the Auth0
-app.delete('/api/multiverse/:id',  async (req, res) =>{
+app.delete('/api/multiverse/:id',  jwtCheck, async (req, res) =>{
     const promptId = req.params.id;
     //console.log("From the delete request-url", req.params,  promptId);
     await db.query('DELETE FROM photos WHERE id=$1', [promptId]);
