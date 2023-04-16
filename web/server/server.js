@@ -17,7 +17,6 @@ app.use(express.json());
 const apiKey = process.env.BANANA_API_KEY;
 const modelKey = process.env.BANANA_MODEL_KEY;
 
-
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
     //res.json({ message: 'Hola, from My template ExpressJS with React-Vite' });
@@ -67,6 +66,15 @@ app.post('/api/multiverse', async (req, res) => {
     }
 
 });
+
+// delete request - this endpoint is not in the path object so it will be enforced for the Auth0
+app.delete('/api/multiverse/:id',  async (req, res) =>{
+    const promptId = req.params.id;
+    //console.log("From the delete request-url", req.params,  promptId);
+    await db.query('DELETE FROM photos WHERE id=$1', [promptId]);
+    res.status(200).json({msg: `Deleted prompt id ${promptId}`}).end();
+  
+  });
 
 
 // console.log that your server is up and running

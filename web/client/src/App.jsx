@@ -10,11 +10,12 @@ import Spinner from "./components/spninner"
 
 function App() {
 
-  const {loginWithPopup, logout, user, isAuthenticated} = useAuth0(); 
-   
+  const { loginWithPopup, logout, user, isAuthenticated } = useAuth0();
+
   const [message, setMessage] = useState(null);
   const [prompts, setPrompts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isCristina, setIsCristina] = useState(false);
 
 
   const callBackend = () => {
@@ -27,9 +28,9 @@ function App() {
   }
 
   const callDb = () => {
-    if(!message){
+    if (!message) {
       return
-    } 
+    }
     // A function to show that the backend is working
     fetch("/api/photos")
       .then((response) => response.json())
@@ -38,12 +39,12 @@ function App() {
         setPrompts(data);
       });
   }
-  
+
   useEffect(() => {
     callBackend();
   }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     callDb();
   }, [message])
 
@@ -51,19 +52,45 @@ function App() {
   const postPrompt = async (newPrompt) => {
     setLoading(true);
     let response;
-    try{
+    try {
       response = await fetch("/api/multiverse", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt: newPrompt })})
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: newPrompt })
+      })
       const data = await response.json();
       //console.log("From the post ", data)
       setPrompts((prompts) => [...prompts, data]);
       callDb();
       setLoading(false);
-    } catch(e){
+    } catch (e) {
       console.error(e);
       setLoading(false);
+    }
+  }
+
+  const handleLogin = () => {
+    loginWithPopup();
+    setIsCristina(true);
+  }
+
+  //A function to handle the Delete funtionality
+  const onDelete = async (id) => {
+    try {
+      console.log(id);
+      const requestOptions = {
+        method: 'DELETE',
+      };
+
+      const response = await fetch(`/api/multiverse/${id}`, requestOptions);
+      const data = await response.json();
+      //console.log(data);
+      if(data.msg){
+        callDb();
+      }
+      //callDb();
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -71,7 +98,7 @@ function App() {
 
   return (
     <>
-      <Header loginWithPopup={loginWithPopup} logout={logout} />
+      <Header loginWithPopup={handleLogin} logout={logout} />
       <main>
         <h1>Let's create Cristina's Multiverse</h1>
         {isAuthenticated ? <p>{`Welcome ${user.nickname} - Master`}</p> : null}
@@ -84,13 +111,13 @@ function App() {
       {loading ? <Spinner /> : null}
       <p className='date'>Current multiverse at {date.toLocaleString()}</p>
       <section className="gallery">
-      <ul>
-            {prompts.map((object, index) => (
+        <ul>
+          {prompts.map((object, index) => (
             <li key={index}>
-            <MyCard key={object.id} prompt={object.prompt} photo={object.photo} is64={true} />
+              <MyCard key={object.id} id={object.id} prompt={object.prompt} photo={object.photo} is64={true} user={isCristina} onDelete={onDelete} />
             </li>
-        ) )}
-      </ul>
+          ))}
+        </ul>
       </section>
     </>
   )

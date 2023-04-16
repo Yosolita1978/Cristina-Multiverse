@@ -10,11 +10,16 @@ const MyCard = (props) => {
         url = props.photo;
     }
 
+    const handleDelete = (id) => {
+        props.onDelete(id);
+    }
+
     return (
         <div className="container" >
         <div className="card">
             <img className="w-full" src={url} alt={props.prompt}></img>
             <p className="text-gray-700 text-base">{props.prompt}</p>
+            {props.user ? <button onClick={() => {handleDelete(props.id)}}>Delete</button> : null}
         </div>
         </div>
 
