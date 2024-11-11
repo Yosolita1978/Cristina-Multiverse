@@ -111,6 +111,7 @@ env.bak/
 venv.bak/
 web/.DS_Store
 web/client/dist
+testingtutorial-cristina-737459002b09.json
 
 # Spyder project settings
 .spyderproject

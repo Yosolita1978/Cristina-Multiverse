@@ -58,7 +58,7 @@ app.post('/api/multiverse', async (req, res) => {
         //console.log(out.modelOutputs[0].image_base64);
         const result = await db.query(
             'INSERT INTO photos(photo, prompt) VALUES($1, $2) RETURNING *',
-            [out.modelOutputs[0].image_base64, modelParameters.prompt],
+            [image_base64, prompt],
         );
         
         //console.log(result.rows[0]);
