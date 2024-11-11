@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const path = require('path');
-const banana = require('@banana-dev/banana-dev');
+const runModel = require('./inference.js');
 const db = require('./db/db-connection.js');
 const { auth } = require('express-oauth2-jwt-bearer');
 
@@ -20,10 +20,6 @@ const validateAccessToken = auth({
     issuerBaseURL: process.env.ISSUER_BASE_URL,
     tokenSigningAlg: 'RS256'
   });
-
-
-const apiKey = process.env.BANANA_API_KEY;
-const modelKey = process.env.BANANA_MODEL_KEY;
 
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
@@ -55,9 +51,9 @@ app.get('/api/photos', async (req, res) => {
 app.post('/api/multiverse', async (req, res) => {
 
     //req.body.prompt
-    const modelParameters = { prompt: req.body.prompt }
+    const prompt = req.body.prompt;
     try {
-        const out = await banana.run(apiKey, modelKey, modelParameters)
+        const image_base64 = await runModel.runModel(prompt);
         //out.modelOutputs[0].image_base64
         //console.log(out.modelOutputs[0].image_base64);
         const result = await db.query(
