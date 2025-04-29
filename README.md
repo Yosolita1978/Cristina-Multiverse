@@ -5,44 +5,53 @@
 
  ![Gif Multiverse](https://raw.githubusercontent.com/Yosolita1978/screenshoots/2cc2a77470c5036edd64b590a357d696fe599cd2/2023/Multiverse/multiversegif.gif)
 
-### In the Backend - 
+# AI Innovations: Exploring Google's Model Garden Solutions
 
-# 🍌 Banana Serverless
+## About the Project
+This project was presented at **Google DevFest Seattle 2024**, where I explored how **Google’s Model Garden on Vertex AI** is transforming AI development. The session covered:
 
-This repo gives a framework to serve ML models in production using simple HTTP servers.
+- 🚀 Leveraging pre-trained models to accelerate AI projects  
+- 📈 Best practices for seamless Google Model Garden integration  
+- 🌍 Real-world applications showcasing cutting-edge AI across industries  
 
-# Quickstart
-**[Follow the quickstart guide in Banana's documentation to use this repo](https://docs.banana.dev/banana-docs/quickstart).** 
+📽️ Watch the talk here: [AI Innovations at DevFest Seattle](https://www.youtube.com/watch?v=vWIYYvaJwYU)
 
-*(choose "GitHub Repository" deployment method)*
+---
 
-<br>
+## Backend - 🤗 Hugging Face & Model Garden
+This project is now hosted on **Hugging Face**, directly connected to **Google Model Garden** for seamless AI model deployment.
 
-# Helpful Links
-Understand the 🍌 [Serverless framework](https://docs.banana.dev/banana-docs/core-concepts/inference-server/serverless-framework) and functionality of each file within it.
+### Quickstart
+Follow the [Hugging Face documentation](https://huggingface.co/docs) to deploy and fine-tune models.
 
-Generalize this framework to [deploy anything on Banana](https://docs.banana.dev/banana-docs/resources/how-to-serve-anything-on-banana).
+#### Helpful Links:
+- [Hugging Face Model Hosting](https://huggingface.co/models)  
+- [Google Model Garden Overview](https://ai.google.dev/)  
+- [Deploying Models with Hugging Face](https://huggingface.co/docs/transformers/main_classes/deploy)  
 
-<br>
+---
 
-## Use Banana for scale.
+## Frontend - ⚡ React & Vite
+### Notes:
+- **Requirements:** React requires **Node >= 14.0.0** & **npm >= 5.6**
+- This template uses icons from `react-icons/io5` and `react-bootstrap`. Check dependencies in **package.json** inside the `client` folder.
+- The **backend server runs on port 8080**, and the **React frontend runs on port 5173** (default Vite port).
+- Confused about **why use Vite?** → [Check out this guide](https://vitejs.dev/guide/)
 
-### In the frontend
+### Helpful Links:
+- [PostgreSQL Setup Guide](https://www.postgresql.org/docs/current/tutorial.html)
+- [Instructions for PG](https://www.postgresql.org/docs/current/app-psql.html)
 
-⚡ **Notes** ⚡  
-* React requires **Node >= 14.0.0** & **npm >= 5.6**
-* This template is using icons from `react-icons/io5` and `react-bootstrap` in the frontend. You can see all the frontend dependencies in the package.json on the `client` folder
-* Please note that your backend server will run from `port 8080`, and your frontend React server will run from `port 5173` (the default Vite port).
+---
 
-* Confused about why use Vite? 🤔 → Check out the [Create a new React app with Vite](https://scrimba.com/articles/create-react-app-with-vite/)
+## About the Author
+This is a **Cristina Rodríguez** project. I have:
+- **3+ years** of experience in **tech mentorship, software engineering, and technical workshops**
+- **20+ years** in **project management, communications, and content creation**
+- A track record of **successful project delivery, event organization, and digital marketing campaigns**
+- Expertise in **volunteer outreach, social media strategy, and pair programming sessions**
 
-⚙️ Links that you could need:
+For inquiries or collaborations, feel free to reach out! 🚀
 
-* The instructions for [pg](https://node-postgres.com/apis/pool)  
-* Setup [postgres correctly](https://github.com/Techtonica/curriculum/blob/main/databases/installing-postgresql.md)
-
-## This is a Cristina Rodriguez's project 
-
-3+ years of experience in tech mentorship, software engineering, technical workshops, and explaining technical concepts to beginners. 20+ years of experience in project management, communications, content management, and content creation. Proven track record of successful project delivery, event organization, digital marketing campaigns, and website development. Experienced in managing volunteer outreach, creating social media posts, and overseeing pair programming sessions.
 
 [<img src="https://img.shields.io/badge/-%40CrissRodriguez-blue?style=plastic&logo=linkedin">](https://www.linkedin.com/in/crissrodriguez/)
